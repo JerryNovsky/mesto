@@ -1,0 +1,7 @@
+.elements__card {
+    max-width: 282px;
+    border-radius: 10px;
+    overflow: hidden;
+    list-style: none;
+    position: relative;
+}

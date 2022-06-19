@@ -1,0 +1,6 @@
+.elements__like-button_active {
+    background-image: url(../../../../images/like-checked.svg);
+    width: 22px;
+    height: 19px;
+    transition: opacity .5s;
+}
