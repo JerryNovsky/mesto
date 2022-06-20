@@ -85,11 +85,15 @@ const initialCards = [
 const list = document.querySelector('.elements__cards');
 const itemTemplate = document.querySelector('.item_template').content;
 let cardName = document.querySelector('.popup__input_type_card-name');
-let cardLink = document.querySelector('.popup__input_type_card-link')
+let cardLink = document.querySelector('.popup__input_type_card-link');
 let formAddElement = document.querySelector('.popup__content_type_add-card');
+const popupFullCardButton = document.querySelector('.popup__cards-close-button');
 
+function closeFullCardPopup() {
+  fullCardsPopup.classList.remove('popup_opened');
+};
 
-
+popupFullCardButton.addEventListener('click', closeFullCardPopup);
 
 function startItem(el) {
         const startElement = itemTemplate.querySelector('.elements__card').cloneNode(true);
@@ -112,17 +116,39 @@ function startItem(el) {
 
 initialCards.forEach(startItem);
 
+const fullCardsPopup = document.querySelector('.popup__cards');
+let imageLink = document.querySelector('.elements__image');
+let imageDescription = document.querySelector('.elements__description');
+
+function openFullCardsPopup (imageLink, imageDescription) {
+  fullCardsPopup.querySelector('.popup__cards-image').src = imageLink.src;
+  fullCardsPopup.querySelector('.popup__cards-description').textContent = imageDescription.textContent;
+  fullCardsPopup.classList.add('popup_opened');
+  console.log('click');
+}
+
+
+document.querySelector('.elements__image').addEventListener('click', function() {
+  openFullCardsPopup(imageLink, imageDescription);
+});
+
+
 
 function renderItem(card) {
     card.preventDefault()
     const newElement = itemTemplate.querySelector('.elements__card').cloneNode(true);
+    let cardName = document.querySelector('.popup__input_type_card-name');
+    let cardLink = document.querySelector('.popup__input_type_card-link');
+    
     newElement.querySelector('.elements__image').src = cardLink.value;
     newElement.querySelector('.elements__name').textContent = cardName.value;
     
-    newElement.querySelector('.elements__delete-button').addEventListener('click', () => {
-        deleteItem(newElement);
-    });
+  
     
+    newElement.querySelector('.elements__delete-button').addEventListener('click', () => {
+      deleteItem(newElement);
+  });
+
     list.prepend(newElement);
     closeAddPopup();
 };
