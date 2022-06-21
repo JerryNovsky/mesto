@@ -90,7 +90,7 @@ let cardName = document.querySelector('.popup__input_type_card-name');
 let cardLink = document.querySelector('.popup__input_type_card-link');
 let formAddElement = document.querySelector('.popup__content_type_add-card');
 const popupFullCardButton = document.querySelector('.popup__cards-close-button');
-const fullCardsPopup = document.querySelector('.popup__cards');
+const fullCardsPopup = document.querySelector('.popup_cards');
 let imageLink = document.querySelector('.elements__image');
 let imageName = document.querySelector('.elements__name');
 
