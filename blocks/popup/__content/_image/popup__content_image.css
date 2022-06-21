@@ -1,0 +1,7 @@
+.popup__content_image {
+    max-width: 75vw;
+    max-height: 75vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
