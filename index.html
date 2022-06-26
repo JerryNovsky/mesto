@@ -21,12 +21,12 @@
                     <div class="profile__info">
                         <div class="profile__button-container">
                             <h1 class="profile__name">Жак-Ив Кусто</h1>
-                            <button class="profile__edit-button button"></button>
+                            <button aria-label="Изменить данные профиля" class="profile__edit-button button"></button>
                         </div>
                         <p class="profile__description">Исследователь океана</p>
                     </div>
                 </div>
-                <button class="profile__add-card-button button"></button>
+                <button aria-label="Добавить карточку" class="profile__add-card-button button"></button>
             </section>
             <section class="elements section">
                 <ul class="elements__cards"></ul>
@@ -37,12 +37,13 @@
         </footer>
 
         <div class="popup popup_type_edit-profile">
-            <div class="popup__content popup__content_type_edit-profile">
-                <button class="popup__close-button popup__edit-close-button button" type="button"></button>
+            <div class="popup__content popup__content_type_edit_profile">
+                <button aria-label="Закрыть попап" class="popup__close-button popup__edit-close-button button"
+                    type="button"></button>
                 <form class="popup__form">
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <input type="text" class="popup__input popup__input_type_name" name="name">
-                    <input type="text" class="popup__input popup__input_type_description" name="job">
+                    <input type="text" class="popup__input popup__input_type_name" name="name" required>
+                    <input type="text" class="popup__input popup__input_type_description" name="job" required>
                     <button class="popup__save-button button" type="submit">Сохранить</button>
                 </form>
             </div>
@@ -50,39 +51,41 @@
 
         <div class="popup popup_type_add-card">
             <div class="popup__content popup__content_type_add-card">
-                <button class="popup__close-button popup__add-close-button button" type="button"></button>
+                <button aria-label="Закрыть попап" class="popup__close-button popup__add-close-button button"
+                    type="button"></button>
                 <form class="popup__form">
                     <h2 class="popup__title">Новое место</h2>
                     <input type="text" class="popup__input popup__input_type_card-name" name="card-name"
-                        placeholder="Название">
-                    <input type="text" class="popup__input popup__input_type_card-link" name="card-link"
-                        placeholder="Ссылка на картинку">
+                        placeholder="Название" required>
+                    <input type="url" class="popup__input popup__input_type_card-link" name="card-link"
+                        placeholder="Ссылка на картинку" required>
                     <button class="popup__save-button button" type="submit">Создать</button>
                 </form>
             </div>
         </div>
 
-        <template class="item_template">
+        <template id="item_template">
             <li class="elements__card">
                 <img class="elements__image">
-                <button class="elements__delete-button button"></button>
+                <button aria-label="Удалить карточку" class="elements__delete-button button"></button>
                 <div class="elements__description">
                     <h3 class="elements__name"></h3>
-                    <button class="elements__like-button button"></button>
+                    <button aria-label="Мне нравится" class="elements__like-button button"></button>
                 </div>
             </li>
         </template>
 
         <div class="popup popup_cards">
             <div class="popup__image">
-                <button class="popup__close-button popup__cards-close-button button" type="button"></button>
+                <button aria-label="Закрыть попап" class="popup__close-button popup__cards-close-button button"
+                    type="button"></button>
                 <img class="popup__cards-image">
                 <h2 class="popup__cards-description"></h2>
             </div>
         </div>
 
     </div>
-    <script src="./scripts/index.js"></script>
+    <script defer src="./scripts/index.js"></script>
 </body>
 
 </html>
