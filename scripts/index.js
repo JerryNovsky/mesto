@@ -45,6 +45,10 @@ const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_description');
 const cardNameInput = document.querySelector('.popup__input_type_card-name');
 const cardLinkInput = document.querySelector('.popup__input_type_card-link');
+const newElement = itemTemplate.querySelector('.elements__card')
+const cardImage = newElement.querySelector('.elements__image');
+const cardName = newElement.querySelector('.elements__name');
+let newCard;
 
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
@@ -81,39 +85,40 @@ function openPopup(popup) {
 }
 
 function renderCard (card) {
-  list.prepend(card); 
+  list.prepend(card);
+   
+  card.querySelector('.elements__delete-button').addEventListener('click', () => {
+    deleteItem(card);
+  });
 };
 
-function createCard(el) {
-  const newElement = itemTemplate.querySelector('.elements__card').cloneNode(true);
-  const likeButton = newElement.querySelector('.elements__like-button');
-  const cardImage = newElement.querySelector('.elements__image');
-  const cardName = newElement.querySelector('.elements__name');
-    
+function createCard(el) { 
   cardImage.src = el.link;
   cardImage.alt = el.name;
   cardName.textContent = el.name;
+  newCard = newElement.cloneNode(true);
 
-  renderCard(newElement);
+  const likeButton = newCard.querySelector('.elements__like-button');
+  const newImageLink = newCard.querySelector('.elements__image');
+  const newImageName = newCard.querySelector('.elements__name');
 
   likeButton.addEventListener('click', () => {
     likeCheck(likeButton);
   });
 
-  document.querySelector('.elements__image').addEventListener('click', function() {
-    openFullCardsPopup(cardImage, cardName);
-  });  
-
-  newElement.querySelector('.elements__delete-button').addEventListener('click', () => {
-    deleteItem(newElement);
+  newCard.querySelector('.elements__image').addEventListener('click', function() {
+    openFullCardsPopup(newImageLink, newImageName);
   });
-
-  return(newElement);
 };
+
+function addCard (element) {
+  createCard(element);
+  renderCard(newCard);
+}
 
 function addPopupSubmitHandler(evt) {
   evt.preventDefault()
-  createCard({name: cardNameInput.value, link: cardLinkInput.value});
+  addCard({name: cardNameInput.value, link: cardLinkInput.value});
   closePopup(popupAddCard);
   resetInput(cardLinkInput, cardNameInput);
 };
@@ -143,6 +148,6 @@ popupFullCardButton.addEventListener('click', function() {
   closePopup(fullCardsPopup);
 });
 
-initialCards.forEach(createCard);
+initialCards.forEach(addCard);
 
 formAddElement.addEventListener('submit', addPopupSubmitHandler);
