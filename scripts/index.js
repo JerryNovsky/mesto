@@ -45,10 +45,6 @@ const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_description');
 const cardNameInput = document.querySelector('.popup__input_type_card-name');
 const cardLinkInput = document.querySelector('.popup__input_type_card-link');
-const newElement = itemTemplate.querySelector('.elements__card')
-const cardImage = newElement.querySelector('.elements__image');
-const cardName = newElement.querySelector('.elements__name');
-let newCard;
 
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
@@ -85,40 +81,39 @@ function openPopup(popup) {
 }
 
 function renderCard (card) {
-  list.prepend(card);
-   
-  card.querySelector('.elements__delete-button').addEventListener('click', () => {
-    deleteItem(card);
-  });
+  list.prepend(card); 
 };
 
-function createCard(el) { 
+function createCard(el) {
+  const newElement = itemTemplate.querySelector('.elements__card').cloneNode(true);
+  const likeButton = newElement.querySelector('.elements__like-button');
+  const cardImage = newElement.querySelector('.elements__image');
+  const cardName = newElement.querySelector('.elements__name');
+    
   cardImage.src = el.link;
   cardImage.alt = el.name;
   cardName.textContent = el.name;
-  newCard = newElement.cloneNode(true);
 
-  const likeButton = newCard.querySelector('.elements__like-button');
-  const newImageLink = newCard.querySelector('.elements__image');
-  const newImageName = newCard.querySelector('.elements__name');
+  renderCard(newElement);
 
   likeButton.addEventListener('click', () => {
     likeCheck(likeButton);
   });
 
-  newCard.querySelector('.elements__image').addEventListener('click', function() {
-    openFullCardsPopup(newImageLink, newImageName);
-  });
-};
+  document.querySelector('.elements__image').addEventListener('click', function() {
+    openFullCardsPopup(cardImage, cardName);
+  });  
 
-function addCard (element) {
-  createCard(element);
-  renderCard(newCard);
-}
+  newElement.querySelector('.elements__delete-button').addEventListener('click', () => {
+    deleteItem(newElement);
+  });
+
+  return(newElement);
+};
 
 function addPopupSubmitHandler(evt) {
   evt.preventDefault()
-  addCard({name: cardNameInput.value, link: cardLinkInput.value});
+  createCard({name: cardNameInput.value, link: cardLinkInput.value});
   closePopup(popupAddCard);
   resetInput(cardLinkInput, cardNameInput);
 };
@@ -148,6 +143,6 @@ popupFullCardButton.addEventListener('click', function() {
   closePopup(fullCardsPopup);
 });
 
-initialCards.forEach(addCard);
+initialCards.forEach(createCard);
 
 formAddElement.addEventListener('submit', addPopupSubmitHandler);
