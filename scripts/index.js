@@ -84,6 +84,11 @@ function renderCard (card) {
   list.prepend(card); 
 };
 
+function addCard(element) {
+  const newCard = createCard(element);
+  renderCard(newCard);
+};
+
 function createCard(el) {
   const newElement = itemTemplate.querySelector('.elements__card').cloneNode(true);
   const likeButton = newElement.querySelector('.elements__like-button');
@@ -94,13 +99,14 @@ function createCard(el) {
   cardImage.alt = el.name;
   cardName.textContent = el.name;
 
-  renderCard(newElement);
-
   likeButton.addEventListener('click', () => {
     likeCheck(likeButton);
   });
 
-  document.querySelector('.elements__image').addEventListener('click', function() {
+  /*Если я правильно идею изначально, то проблема её реализации была вот в этом селекторе ↓. Удаляя renderCard из функции сreateCard, карточки не загружались на страницу, поскольку не были предварительно отрендерены. 
+  Для рендера карточки перед развешиванием слушателей функция renderCard и стояла перед слушателями изначально. Когда я последовал по вашему пути, слушатели не находили карточку, а в консоли была ошибка. 
+  Устранить её получилось через переменную let. Пройдя эти функции дебаггером я и увидел, что именно в приходит в этот слушатель и почему ваше замечание из ревью не получалось реализовать.*/
+  newElement.querySelector('.elements__image').addEventListener('click', function() {
     openFullCardsPopup(cardImage, cardName);
   });  
 
@@ -108,12 +114,12 @@ function createCard(el) {
     deleteItem(newElement);
   });
 
-  return(newElement);
+  return newElement;
 };
 
 function addPopupSubmitHandler(evt) {
   evt.preventDefault()
-  createCard({name: cardNameInput.value, link: cardLinkInput.value});
+  addCard({name: cardNameInput.value, link: cardLinkInput.value});
   closePopup(popupAddCard);
   resetInput(cardLinkInput, cardNameInput);
 };
@@ -143,6 +149,6 @@ popupFullCardButton.addEventListener('click', function() {
   closePopup(fullCardsPopup);
 });
 
-initialCards.forEach(createCard);
+initialCards.forEach(addCard);
 
 formAddElement.addEventListener('submit', addPopupSubmitHandler);
