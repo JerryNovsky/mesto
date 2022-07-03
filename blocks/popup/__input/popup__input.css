@@ -17,6 +17,11 @@
     margin-top: 30px;
 }
 
+.popup__input:focus {
+    outline: none;
+    border: 1px solid #42AAFF;
+}
+
 @media screen and (max-width: 767px) {
     .popup__input {
         margin-top: 75px;

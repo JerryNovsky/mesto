@@ -1,30 +1,3 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 const popupEditButton = document.querySelector('.profile__edit-button');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupAddCard = document.querySelector('.popup_type_add-card');
@@ -46,10 +19,7 @@ const jobInput = document.querySelector('.popup__input_type_description');
 const cardNameInput = document.querySelector('.popup__input_type_card-name');
 const cardLinkInput = document.querySelector('.popup__input_type_card-link');
 
-function closePopup (popup) {
-  popup.classList.remove('popup_opened');
-};
-
+/*Изменение данных о себе*/
 function formSubmitHandler (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
@@ -57,38 +27,55 @@ function formSubmitHandler (evt) {
   closePopup(popupEditProfile);
 };
 
-function deleteItem(item) {
-  item.remove();
-}
-
+/*Проверка нажатия кнопки лайка*/
 function likeCheck(like) { 
   like.classList.toggle('elements__like-button_active');
 };
 
+/*Сброс значений из полей добавления карточки*/
 function resetInput(link, name) {
   link.value = '';
   name.value = '';
 }
 
+/*Открытие полноразмерного изображения*/
 function openFullCardsPopup (Link, name) {
   fullCardsImage.src = Link.src;
   fullCardsDescription.textContent = name.textContent;
   openPopup(fullCardsPopup);
 };
 
+/*Открытие попапа*/
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
 
+/*Закрытие попапа*/
+function closePopup (popup) {
+  popup.classList.remove('popup_opened');
+};
+
+/*Закрытие попапа по клику на оверлей*/
+function overlayClickClosePopup(popup) {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target === evt.currentTarget) {
+      closePopup(popup);
+    };
+  });
+};
+
+/*Рендер карточки*/
 function renderCard (card) {
   list.prepend(card); 
 };
 
+/*Добавление карточки на страницу*/
 function addCard(element) {
   const newCard = createCard(element);
   renderCard(newCard);
 };
 
+/*Создание карточки*/
 function createCard(el) {
   const newElement = itemTemplate.querySelector('.elements__card').cloneNode(true);
   const likeButton = newElement.querySelector('.elements__like-button');
@@ -103,9 +90,7 @@ function createCard(el) {
     likeCheck(likeButton);
   });
 
-  /*Если я правильно идею изначально, то проблема её реализации была вот в этом селекторе ↓. Удаляя renderCard из функции сreateCard, карточки не загружались на страницу, поскольку не были предварительно отрендерены. 
-  Для рендера карточки перед развешиванием слушателей функция renderCard и стояла перед слушателями изначально. Когда я последовал по вашему пути, слушатели не находили карточку, а в консоли была ошибка. 
-  Устранить её получилось через переменную let. Пройдя эти функции дебаггером я и увидел, что именно в приходит в этот слушатель и почему ваше замечание из ревью не получалось реализовать.*/
+  
   newElement.querySelector('.elements__image').addEventListener('click', function() {
     openFullCardsPopup(cardImage, cardName);
   });  
@@ -117,12 +102,18 @@ function createCard(el) {
   return newElement;
 };
 
+/*Сабмит добавление пользовательской карточки*/
 function addPopupSubmitHandler(evt) {
   evt.preventDefault()
   addCard({name: cardNameInput.value, link: cardLinkInput.value});
   closePopup(popupAddCard);
   resetInput(cardLinkInput, cardNameInput);
 };
+
+/*Удаление карточки*/
+function deleteItem(item) {
+  item.remove();
+}
 
 popupEditButton.addEventListener('click', function() {
   openPopup(popupEditProfile);
@@ -136,6 +127,14 @@ popupEditCloseButton.addEventListener('click', function() {
 
 formEditElement.addEventListener('submit', formSubmitHandler);
 
+document.addEventListener('keydown', function(evt) {
+  if (evt.key === 'Escape') {
+    closePopup(popupAddCard);
+    closePopup(popupEditProfile);
+    closePopup(fullCardsPopup);
+  };
+});
+
 popupAddCardButton.addEventListener('click', function() {
   openPopup(popupAddCard);
 });
@@ -144,10 +143,13 @@ popupAddCloseButton.addEventListener('click', function() {
   closePopup(popupAddCard);
 });
 
- 
 popupFullCardButton.addEventListener('click', function() {
   closePopup(fullCardsPopup);
 });
+
+overlayClickClosePopup(popupEditProfile);
+overlayClickClosePopup(popupAddCard);
+overlayClickClosePopup(fullCardsPopup);
 
 initialCards.forEach(addCard);
 
