@@ -1,9 +1,16 @@
 .popup__input-error_active {
-    display: block;
+    visibility: visible;
+    height: 30px;
     margin: 5px 0 0 36px;
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
     color: red;
     align-self: flex-start;
+}
+
+@media screen and (max-width: 767px) {
+    .popup__input-error_active {
+     margin-left: 22px;
+    }
 }

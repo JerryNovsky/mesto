@@ -42,11 +42,23 @@
                     type="button"></button>
                 <form class="popup__form" novalidate>
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <input type="text" id="name-input" class="popup__input popup__input_type_name" name="name"
-                        minlength="2" maxlength="40" required>
+                    <input 
+                    type="text" 
+                    id="name-input" 
+                    class="popup__input popup__input_type_name" 
+                    name="name"
+                    minlength="2" 
+                    maxlength="40" 
+                    required>
                     <span class="name-input-error popup__input-error"></span>
-                    <input type="text" id="job-input" class="popup__input popup__input_type_description" name="job"
-                        minlength="2" maxlength="200" required>
+                    <input 
+                    type="text" 
+                    id="job-input" 
+                    class="popup__input popup__input_type_description" 
+                    name="job"
+                    minlength="2" 
+                    maxlength="200" 
+                    required>
                     <span class="job-input-error popup__input-error"></span>
                     <button type="submit" class="popup__save-button button">Сохранить</button>
                 </form>
@@ -59,11 +71,23 @@
                     type="button"></button>
                 <form class="popup__form" novalidate>
                     <h2 class="popup__title">Новое место</h2>
-                    <input type="text" id="card-name-input" class="popup__input popup__input_type_card-name"
-                        name="card-name" placeholder="Название" minlength="2" maxlength="30" required>
+                    <input 
+                    type="text" 
+                    id="card-name-input" 
+                    class="popup__input popup__input_type_card-name"
+                    name="card-name" 
+                    placeholder="Название" 
+                    minlength="2" 
+                    maxlength="30" 
+                    required>
                     <span class="card-name-input-error popup__input-error"></span>
-                    <input type="url" id="url-input" class="popup__input popup__input_type_card-link" name="card-link"
-                        placeholder="Ссылка на картинку" required>
+                    <input 
+                    type="url" 
+                    id="url-input" 
+                    class="popup__input popup__input_type_card-link" 
+                    name="card-link"
+                    placeholder="Ссылка на картинку" 
+                    required>
                     <span class="url-input-error popup__input-error"></span>
                     <button type="submit" class="popup__save-button button">Создать</button>
                 </form>
@@ -71,17 +95,17 @@
         </div>
         <!--template-заготовка для карточек-->
         <template id="item_template">
-            <li class="elements__card">
-                <img class="elements__image">
-                <button aria-label="Удалить карточку" class="elements__delete-button button"></button>
-                <div class="elements__description">
-                    <h3 class="elements__name"></h3>
-                    <button aria-label="Мне нравится" class="elements__like-button button"></button>
+            <li class="card">
+                <img class="card__image">
+                <button aria-label="Удалить карточку" class="card__delete-button button"></button>
+                <div class="card__description">
+                    <h3 class="card__name"></h3>
+                    <button aria-label="Мне нравится" class="card__like-button button"></button>
                 </div>
             </li>
         </template>
 
-        <div class="popup popup_cards">
+        <div class="popup popup_type_cards">
             <div class="popup__image">
                 <button aria-label="Закрыть попап" class="popup__close-button popup__cards-close-button button"
                     type="button"></button>
