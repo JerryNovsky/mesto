@@ -36,12 +36,13 @@ function putLike(like) {
 function resetInput(link, name) {
   link.value = '';
   name.value = '';
-}
+};
 
 /*Открытие полноразмерного изображения*/
-function openFullCardsPopup(Link, name) {
-  fullCardsImage.src = Link.src;
+function openFullCardsPopup(link, name) {
+  fullCardsImage.src = link.src;
   fullCardsDescription.textContent = name.textContent;
+  fullCardsImage.alt = name.textContent;
   openPopup(fullCardsPopup);
 };
 
@@ -49,7 +50,7 @@ function openFullCardsPopup(Link, name) {
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handleEscClose);
-}
+};
 
 /*Закрытие попапа*/
 function closePopup(popup) {
@@ -68,8 +69,8 @@ function overlayClickClosePopup(popup) {
 
 /*Закрытие попапа по нажатию Escape*/
 function handleEscClose(evt) {
-  const openedPopup = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   };
 };
@@ -100,7 +101,6 @@ function createCard(el) {
     putLike(likeButton);
   });
 
-
   newElement.querySelector('.card__image').addEventListener('click', function () {
     openFullCardsPopup(cardImage, cardName);
   });
@@ -111,12 +111,6 @@ function createCard(el) {
 
   return newElement;
 };
-
-/*Блокировка кнопки сабмита*/
-function disableSubmitButton(button) {
-  button.setAttribute('disabled', true);
-  button.classList.add('popup__save-button_inactive');
-}
 
 /*Сабмит добавление пользовательской карточки*/
 function addPopupSubmitHandler(evt) {
@@ -129,7 +123,7 @@ function addPopupSubmitHandler(evt) {
 /*Удаление карточки*/
 function deleteItem(item) {
   item.remove();
-}
+};
 
 popupEditButton.addEventListener('click', function () {
   nameInput.value = profileName.textContent;
@@ -145,7 +139,6 @@ popupAddCloseButton.addEventListener('click', function () {
   closePopup(popupAddCard);
 });
 
-
 formEditElement.addEventListener('submit', handleSubmitProfileForm);
 
 popupAddCardButton.addEventListener('click', function () {
@@ -153,7 +146,6 @@ popupAddCardButton.addEventListener('click', function () {
   disableSubmitButton(submitButton);
   openPopup(popupAddCard);
 });
-
 
 popupFullCardButton.addEventListener('click', function () {
   closePopup(fullCardsPopup);

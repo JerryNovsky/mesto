@@ -50,12 +50,16 @@ function hasInvalidInput(inputList) {
 
 function toggleButtonState(inputList, buttonElement, validConfig) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(validConfig.inactiveButtonClass);
-    buttonElement.setAttribute('disabled', true);
+    disableSubmitButton(buttonElement);
   } else {
     buttonElement.classList.remove(validConfig.inactiveButtonClass);
     buttonElement.removeAttribute('disabled', true);
   }
+};
+
+function disableSubmitButton(button) {
+  button.setAttribute('disabled', true);
+  button.classList.add('popup__save-button_inactive');
 };
 
 enableValidation({
