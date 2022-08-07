@@ -1,11 +1,11 @@
-import { itemTemplate, fullCardsImage, fullCardsDescription, fullCardsPopup, openPopup } from './index.js';
+import { itemTemplate, fullCardsImage, fullCardsDescription, fullCardsPopup } from './constants.js';
+import { openPopup } from './index.js';
 
 export class Card {
   constructor(data, selector) {
     this._name = data.name;
     this._link = data.link;
     this._selector = selector;
-    this._
   };
 
   _getTemplate() {
