@@ -1,6 +1,7 @@
-import { Card } from "./card.js";
-import { formConfig } from "./FormValidator.js";
+import { Card } from "./Card.js";
+import { formConfig } from "./constants.js";
 import { FormValidator } from "./FormValidator.js";
+import { initialCards } from "./constants.js";
 
 const popupEditButton = document.querySelector('.profile__edit-button');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
@@ -77,11 +78,6 @@ function addCard(element) {
   renderCard(cardElement);
 };
 
-function disableSubmitButton(button) {
-  button.setAttribute('disabled', true);
-  button.classList.add('popup__save-button_inactive');
-};
-
 /*Сабмит добавления пользовательской карточки*/
 function addPopupSubmitHandler(evt) {
   evt.preventDefault()
@@ -89,6 +85,10 @@ function addPopupSubmitHandler(evt) {
   closePopup(popupAddCard);
   resetInput(cardLinkInput, cardNameInput);
 };
+
+initialCards.forEach((item) => {
+  addCard(item);
+});
 
 const editFormValidation = new FormValidator(formConfig, formEditElement);
 const addCardFormValidation = new FormValidator(formConfig, formAddElement);
@@ -114,7 +114,8 @@ formEditElement.addEventListener('submit', handleSubmitProfileForm);
 
 popupAddCardButton.addEventListener('click', function () {
   const submitButton = formAddElement.querySelector('.popup__save-button');
-  disableSubmitButton(submitButton);
+  editFormValidation.disableSubmitButton(submitButton);
+  addCardFormValidation.disableSubmitButton(submitButton);
   openPopup(popupAddCard);
 });
 
