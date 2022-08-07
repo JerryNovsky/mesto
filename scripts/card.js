@@ -1,5 +1,4 @@
-import { itemTemplate, fullCardsImage, fullCardsDescription, fullCardsPopup } from './constants.js';
-import { openPopup } from './index.js';
+import { itemTemplate, fullCardsImage, fullCardsDescription, fullCardsPopup, openPopup } from './index.js';
 
 export class Card {
   constructor(data, selector) {

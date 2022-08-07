@@ -1,26 +1,29 @@
-import { Card } from "./card.js";
-import { formConfig } from "./constants.js";
-import { FormValidator } from "./FormValidator.js";
-import {
-  initialCards,
-  popupEditButton,
-  popupEditProfile,
-  popupAddCard,
-  popupEditCloseButton,
-  popupAddCloseButton,
-  popupAddCardButton,
-  formEditElement,
-  formAddElement,
-  popupFullCardButton,
-  profileName,
-  profileJob,
-  nameInput,
-  jobInput,
-  cardNameInput,
-  cardLinkInput,
-  fullCardsPopup,
-  list
-} from "./constants.js";
+import { Card } from './Card.js';
+import { formConfig, initialCards } from './constants.js';
+import { FormValidator } from './FormValidator.js';
+
+const popupEditButton = document.querySelector('.profile__edit-button');
+const popupEditProfile = document.querySelector('.popup_type_edit-profile');
+const popupAddCard = document.querySelector('.popup_type_add-card');
+const popupEditCloseButton = document.querySelector('.popup__edit-close-button');
+const popupAddCloseButton = document.querySelector('.popup__add-close-button');
+const popupAddCardButton = document.querySelector('.profile__add-card-button');
+const formEditElement = document.querySelector('.popup__content_type_edit-profile');
+const formAddElement = document.querySelector('.popup__content_type_add-card');
+const popupFullCardButton = document.querySelector('.popup__cards-close-button');
+const profileName = document.querySelector('.profile__name');
+const profileJob = document.querySelector('.profile__description');
+const nameInput = document.querySelector('.popup__input_type_name');
+const jobInput = document.querySelector('.popup__input_type_description');
+const cardNameInput = document.querySelector('.popup__input_type_card-name');
+const cardLinkInput = document.querySelector('.popup__input_type_card-link');
+const list = document.querySelector('.elements__cards');
+export const itemTemplate = document.querySelector('#item_template').content;
+export const fullCardsImage = document.querySelector('.popup__cards-image');
+export const fullCardsDescription = document.querySelector('.popup__cards-description');
+export const fullCardsPopup = document.querySelector('.popup_type_cards');
+
+
 
 /*Изменение данных о себе*/
 function handleSubmitProfileForm(evt) {
