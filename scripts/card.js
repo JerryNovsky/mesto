@@ -7,6 +7,7 @@ export class Card {
     this._selector = selector;
   };
 
+  /*Клонирование элемента и его возврат*/
   _getTemplate() {
     const newElement = itemTemplate.querySelector('.card').cloneNode(true);
     return newElement;
@@ -22,6 +23,7 @@ export class Card {
     /*реализация через this._element = null не работает корректно*/
     item.remove();
   };
+
   /*Открытие полноразмерного изображение*/
   _openFullCardsPopup(link, name) {
     fullCardsImage.src = link.src;

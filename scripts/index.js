@@ -39,11 +39,13 @@ function resetInput(link, name) {
   name.value = '';
 };
 
+/*открытие попапа*/
 export function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handleEscClose);
 };
 
+/*Закрытие попапа*/
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', handleEscClose);
