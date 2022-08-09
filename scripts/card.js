@@ -19,9 +19,10 @@ export class Card {
   };
 
   /*Удаление карточки*/
-  _deleteItem(item) {
+  _deleteItem() {
     /*реализация через this._element = null не работает корректно*/
-    item.remove();
+    this._element.remove();
+    this._element = null;
   };
 
   /*Открытие полноразмерного изображение*/
@@ -58,7 +59,7 @@ export class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._cardName.textContent = this._name;
-    this._setEventListeners(this._cardImage, this._cardName, this._element)
+    this._setEventListeners();
     return this._element;
   };
 };

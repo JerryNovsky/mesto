@@ -116,8 +116,7 @@ formEditElement.addEventListener('submit', handleSubmitProfileForm);
 
 popupAddCardButton.addEventListener('click', function () {
   const submitButton = formAddElement.querySelector('.popup__save-button');
-  editFormValidation.disableSubmitButton(submitButton);
-  addCardFormValidation.disableSubmitButton(submitButton);
+  addCardFormValidation.disableSubmitButton();
   openPopup(popupAddCard);
 });
 
