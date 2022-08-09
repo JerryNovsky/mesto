@@ -20,7 +20,6 @@ export class Card {
 
   /*Удаление карточки*/
   _deleteItem() {
-    /*реализация через this._element = null не работает корректно*/
     this._element.remove();
     this._element = null;
   };
