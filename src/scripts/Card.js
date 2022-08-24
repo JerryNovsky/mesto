@@ -1,10 +1,11 @@
-import { itemTemplate, fullCardsImage, fullCardsDescription, fullCardsPopup, openPopup } from './index.js';
+import { itemTemplate, fullCardsPopup } from './constants.js';
 
 export class Card {
-  constructor(data, selector) {
+  constructor(data, selector, openPopup) {
     this._name = data.name;
     this._link = data.link;
     this._selector = selector;
+    this._openPopup = openPopup;
   };
 
   /*Клонирование элемента и его возврат*/
@@ -24,14 +25,6 @@ export class Card {
     this._element = null;
   };
 
-  /*Открытие полноразмерного изображение*/
-  _openFullCardsPopup(link, name) {
-    fullCardsImage.src = link.src;
-    fullCardsDescription.textContent = name.textContent;
-    fullCardsImage.alt = name.textContent;
-    openPopup(fullCardsPopup);
-  };
-
   /*Навешивание слушателей*/
   _setEventListeners() {
     const likeButton = this._element.querySelector('.card__like-button')
@@ -41,7 +34,7 @@ export class Card {
     });
 
     this._cardImage.addEventListener('click', () => {
-      this._openFullCardsPopup(this._cardImage, this._cardName);
+      this._openPopup(fullCardsPopup);
     });
 
     this._element.querySelector('.card__delete-button').addEventListener('click', () => {

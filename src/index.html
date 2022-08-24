@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
-    <link rel="stylesheet" href="./pages/index.css">
     <link rel="icon" href="./images/mesto.png">
 </head>
 
@@ -18,7 +17,7 @@
         <main class="main">
             <section class="profile section">
                 <div class="profile__container">
-                    <img class="profile__avatar" alt="Аватар пользователя" src="./images/avatar.png">
+                    <img class="profile__avatar" alt="Аватар пользователя" src="<%=require('./images/avatar.png')%>">
                     <div class="profile__info">
                         <div class="profile__button-container">
                             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -117,11 +116,6 @@
 
     </div>
     
-    <script defer type="module" src="./scripts/card.js"></script>
-    <script defer type="module" src="./scripts/constants.js"></script>
-    <script defer type="module" src="./scripts/index.js"></script>
-    <script defer type="module" src="./scripts/FormValidator.js"></script>
-
 </body>
 
 </html>
