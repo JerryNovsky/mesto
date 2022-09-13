@@ -1,5 +1,6 @@
 .elements {
     padding-top: 51px;
+    min-height: 802px;
 }
 
 @media screen and (max-width: 767px) {

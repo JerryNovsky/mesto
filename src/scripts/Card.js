@@ -1,16 +1,15 @@
-import { itemTemplate, fullCardsPopup } from './constants.js';
-
 export class Card {
-  constructor(data, selector, openPopup) {
+  constructor(data, selector, openPopup, popup) {
     this._name = data.name;
     this._link = data.link;
-    this._selector = selector;
+    this._selector = document.querySelector(selector).content;
     this._openPopup = openPopup;
+    this._popup = document.querySelector(popup);
   };
 
   /*Клонирование элемента и его возврат*/
   _getTemplate() {
-    const newElement = itemTemplate.querySelector('.card').cloneNode(true);
+    const newElement = this._selector.querySelector('.card').cloneNode(true);
     return newElement;
   };
 
@@ -34,11 +33,11 @@ export class Card {
     });
 
     this._cardImage.addEventListener('click', () => {
-      this._openPopup(fullCardsPopup);
+      this._openPopup(this._popup);
     });
 
     this._element.querySelector('.card__delete-button').addEventListener('click', () => {
-      this._deleteItem(this._element);
+      this._deleteItem();
     });
   };
 

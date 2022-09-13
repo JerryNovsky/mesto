@@ -1,21 +1,19 @@
-import { nameInput, jobInput } from "./constants.js";
-
 export default class UserInfo {
-    constructor(dataSelector) {
-        this._nameContainer = document.querySelector(dataSelector.name);
-        this._jobContainer = document.querySelector(dataSelector.job);
+    constructor(nameSelector, jobSelector) {
+        this._nameContainer = document.querySelector(nameSelector);
+        this._jobContainer = document.querySelector(jobSelector);
     }
 
     getUserInfo() {
-        const objectUserInfo = {
+        return {
             name: this._nameContainer.textContent,
-            description: this._jobContainer.textContent
+            job: this._jobContainer.textContent
         };
-        return objectUserInfo;
     }
 
-    setUserInfo() {
-        this._nameContainer.textContent = nameInput.value;
-        this._jobContainer.textContent = jobInput.value;
+    setUserInfo({ name, job }) {
+        this._nameContainer.textContent = name;
+        this._jobContainer.textContent = job;
     };
+
 }

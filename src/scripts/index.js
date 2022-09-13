@@ -8,37 +8,49 @@ import {
   formConfig,
   initialCards,
   popupEditButton,
-  popupEditProfile,
-  popupAddCard,
   popupAddCardButton,
   formEditElement,
   formAddElement,
-  fullCardsPopup,
-  itemTemplate,
   nameInput,
   jobInput
 } from './constants.js';
 import { FormValidator } from './FormValidator.js';
 import UserInfo from './UserInfo.js';
 
-const userInfo = new UserInfo({ name: '.profile__name', job: '.profile__description' });
-userInfo.getUserInfo();
+const userInfo = new UserInfo('.profile__name', '.profile__description');
 
-const fullImagePopup = new PopupWithImage(fullCardsPopup);
+const fullImagePopup = new PopupWithImage('.popup_type_cards', '.popup__cards-image', '.popup__cards-description');
 fullImagePopup.setEventListeners();
 
 const editFormValidation = new FormValidator(formConfig, formEditElement);
-const addCardFormValidation = new FormValidator(formConfig, formAddElement);
+editFormValidation.enableValidation();
 
-const editProfilePopup = new PopupWithForm(popupEditProfile, handleSubmitProfileForm);
-const addCardPopup = new PopupWithForm(popupAddCard, addPopupSubmitHandler);
+const addCardFormValidation = new FormValidator(formConfig, formAddElement);
+addCardFormValidation.enableValidation();
+
+//Редактирование информации о себе
+const editProfilePopup = new PopupWithForm('.popup_type_edit-profile', {
+  submitCallback: (object) => {
+    userInfo.setUserInfo(object);
+  }
+});
+
+editProfilePopup.setEventListeners(formEditElement);
+
+//Добавление пользовательской карточки
+const addCardPopup = new PopupWithForm('.popup_type_add-card', {
+  submitCallback: (object) => {
+    cardList.addItem(addNewCard(object));
+  }
+});
+
+addCardPopup.setEventListeners(formAddElement);
+
 
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const newCard = new Card(item, itemTemplate, () => handleCardClick(item));
-    const cardElement = newCard.generateCard();
-    cardList.addItem(cardElement);
+    cardList.addItem(addNewCard(item));
   }
 }, '.elements__cards');
 
@@ -51,44 +63,30 @@ function handleCardClick(data) {
 
 //Добавление новой карточки в DOM
 function addNewCard(element) {
-  const newCard = new Card(element, itemTemplate, () => handleCardClick(element));
-  const cardElement = newCard.generateCard();
-  cardList.addItem(cardElement);
-};
-
-//Сабмит изменения данных о себе
-function handleSubmitProfileForm(evt) {
-  evt.preventDefault();
-  userInfo.setUserInfo();
-  editProfilePopup.close();
+  const newCard = new Card(element, '#item_template', () => handleCardClick(element), '.popup_type_cards');
+  return newCard.generateCard();
 };
 
 //Сабмит добавления пользовательской карточки
 function addPopupSubmitHandler(evt) {
   evt.preventDefault()
-  addNewCard(addCardPopup._getInputValues());
+
   addCardPopup.close();
 };
 
 //Открытие попапа редактирования профиля
 function openPopupProfile() {
-  const userData = userInfo.getUserInfo();
-  nameInput.value = userData.name;
-  jobInput.value = userData.description;
+  const defaultUserData = userInfo.getUserInfo();
+  nameInput.value = defaultUserData.name;
+  jobInput.value = defaultUserData.job;
   editProfilePopup.open();
-  editProfilePopup.setEventListeners(formEditElement);
-  editFormValidation.enableValidation();
 }
 
 //Открытие попапа добавления карточки 
 function openPopupAddCard() {
   addCardPopup.open();
-  addCardPopup.setEventListeners(formAddElement);
-  addCardFormValidation.enableValidation();
   addCardFormValidation.disableSubmitButton();
 }
-
-addCardFormValidation.enableValidation();
 
 popupEditButton.addEventListener('click', openPopupProfile);
 
