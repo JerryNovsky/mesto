@@ -1,6 +1,6 @@
 .popup__input {
     padding: 0;
-    margin-top: 54px;
+    margin-bottom: 13px;
     width: 358px;
     height: 27px;
     font-weight: 400;
@@ -13,10 +13,6 @@
     outline: none;
 }
 
-.popup__input:last-of-type {
-    margin-top: 0px;
-}
-
 .popup__input:focus {
     outline: none;
     border: 1px solid #42AAFF;
@@ -24,7 +20,6 @@
 
 @media screen and (max-width: 767px) {
     .popup__input {
-        margin-top: 75px;
         width: 238px;
         height: 27px;
     }

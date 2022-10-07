@@ -2,6 +2,7 @@ export default class Popup {
     constructor(popup) {
         this._popup = document.querySelector(popup);
         this._handleEscClose = this._handleEscClose.bind(this);
+        this._submitButton = this._popup.querySelector('.popup__save-button')
     };
 
     open() {
@@ -31,4 +32,13 @@ export default class Popup {
             };
         });
     };
+
+    handleSaving() {
+        this._submitButton.textContent = 'Сохранение...';
+    }
+
+    handleSaved() {
+        this._submitButton.textContent = 'Сохранить';
+    }
+
 };

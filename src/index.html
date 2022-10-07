@@ -18,6 +18,9 @@
             <section class="profile section">
                 <div class="profile__container">
                     <img class="profile__avatar" alt="Аватар пользователя" src="<%=require('./images/avatar.png')%>">
+                    <div class="profile__cover">
+                        <img class="profile__edit-avatar-icon" alt="Редактирование аватара" src="<%=require('./images/edit.png')%>">
+                    </div>
                     <div class="profile__info">
                         <div class="profile__button-container">
                             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -93,6 +96,37 @@
                 </form>
             </div>
         </div>
+
+        <div class="popup popup_delete-card-confirmation">
+            <div class="popup__content">
+                <button aria-label="Закрыть попап" class="popup__close-button popup__confirm-close-button button"
+                    type="button"></button>
+                <form class="popup__form" novalidate>
+                    <h2 class="popup__title popup__title_confirm">Вы уверены?</h2>
+                    <button type="submit" class="popup__save-button button">Да</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="popup popup_type_edit-avatar">
+            <div class="popup__content popup__content_type_edit-avatar">
+                <button aria-label="Закрыть попап" class="popup__close-button popup__avatar-close-button button"
+                    type="button"></button>
+                    <h2 class="popup__title">Обновить аватар</h2>
+                    <form class="popup__form" novalidate>
+                    <input 
+                        type="url" 
+                        id="url-input" 
+                        class="popup__input popup__input_type_avatar-link" 
+                        name="avatar-link"
+                        placeholder="Ссылка на картинку" 
+                        required>
+                    <span class="url-input-error popup__input-error"></span>
+                    <button type="submit" class="popup__save-button button">Сохранить</button>
+                </form>
+            </div>
+        </div>
+
         <!--template-заготовка для карточек-->
         <template id="item_template">
             <li class="card">
@@ -100,7 +134,10 @@
                 <button aria-label="Удалить карточку" class="card__delete-button button"></button>
                 <div class="card__description">
                     <h3 class="card__name"></h3>
-                    <button aria-label="Мне нравится" class="card__like-button button"></button>
+                    <div class="card__like-container"> 
+                        <button aria-label="Мне нравится" class="card__like-button button"></button>
+                        <h3 class="card__like-quantity">0</h3>
+                    </div>
                 </div>
             </li>
         </template>

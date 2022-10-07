@@ -9,6 +9,7 @@ export default class PopupWithForm extends Popup {
         this.inputArray = Array.from(this._formElement.querySelectorAll('.popup__input'));
         this._nameInput = this._formElement.querySelector('.popup__input_type_card-name');
         this._linkInput = this._formElement.querySelector('.popup__input_type_card-link');
+        this._avatarLink = this._formElement.querySelector('.popup__input_type_avatar-link');
     }
 
     _getInputValues() {
@@ -30,7 +31,6 @@ export default class PopupWithForm extends Popup {
 
     close() {
         super.close();
-        this._nameInput.value = '';
-        this._linkInput.value = '';
+        this._formElement.reset();
     }
 }
