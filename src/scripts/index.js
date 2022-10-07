@@ -147,7 +147,7 @@ function addNewCard(element) {
 function openPopupProfile() {
   const defaultUserData = userInfo.getUserInfo();
   nameInput.value = defaultUserData.name;
-  jobInput.value = defaultUserData.job;
+  jobInput.value = defaultUserData.about;
   editProfilePopup.open();
 }
 
