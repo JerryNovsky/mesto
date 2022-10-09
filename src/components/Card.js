@@ -47,6 +47,13 @@ export class Card {
     })
   }
 
+  /*Удаление карточки*/
+  deleteCard() {
+    this._element.remove();
+    this._element = null;
+
+  };
+
   /*Навешивание слушателей*/
   _setEventListeners() {
 
@@ -65,7 +72,7 @@ export class Card {
 
     if (this._myCard)
       this._deleteButton.addEventListener('click', () => {
-        this._handleDeleteCard(this._cardID, this._element);
+        this._handleDeleteCard(this);
       })
   }
 

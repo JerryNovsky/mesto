@@ -20,4 +20,4 @@ export const cardNameInput = document.querySelector('.popup__input_type_card-nam
 export const cardLinkInput = document.querySelector('.popup__input_type_card-link');
 export const fullCardsImage = document.querySelector('.popup__cards-image');
 export const fullCardsDescription = document.querySelector('.popup__cards-description');
-export const editAvatarButton = document.querySelector('.profile__cover');
+export const avatarEditButton = document.querySelector('.profile__cover');

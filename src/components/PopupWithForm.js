@@ -10,6 +10,7 @@ export default class PopupWithForm extends Popup {
         this._nameInput = this._formElement.querySelector('.popup__input_type_card-name');
         this._linkInput = this._formElement.querySelector('.popup__input_type_card-link');
         this._avatarLink = this._formElement.querySelector('.popup__input_type_avatar-link');
+        this._submitButton = this._formElement.querySelector('.popup__save-button');
     }
 
     _getInputValues() {
@@ -32,5 +33,13 @@ export default class PopupWithForm extends Popup {
     close() {
         super.close();
         this._formElement.reset();
+    }
+
+    handleSaving() {
+        this._submitButton.textContent = 'Сохранение...';
+    }
+
+    handleSaved(message) {
+        this._submitButton.textContent = message;
     }
 }
